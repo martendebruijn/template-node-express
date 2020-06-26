@@ -1,7 +1,5 @@
 # Template NodeJS with Express
 
-Template repo for NodeJS with Express projects.
-
 <div style="display:flex;">
   <img src="https://img.shields.io/github/license/martendebruijn/template-node-express" />
 </div>
@@ -9,6 +7,10 @@ Template repo for NodeJS with Express projects.
 ## Introduction
 
 Template repo for NodeJS with Express projects.
+
+## TODO:
+
+- [ ] Update package.json and package-lock.json to new project repo
 
 <!-- ![Screenshot applicatie](/readme_img/screenshot-dark.png) -->
 
