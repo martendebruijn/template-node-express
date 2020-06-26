@@ -3,7 +3,8 @@ require('dotenv').config();
 const express = require('express'),
   router = require('./modules/router.js'),
   path = require('path'),
-  compression = require('compression');
+  compression = require('compression'),
+  app = express();
 
 const port = process.env.PORT || 3000;
 
@@ -15,6 +16,4 @@ app
   .set('view engine', 'ejs')
   .get('/', router.home);
 
-const server = app.listen(port, () =>
-  console.log(`App listening on port ${port}`)
-);
+app.listen(port, () => console.log(`App listening on port ${port}`));

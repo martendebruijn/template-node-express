@@ -2,12 +2,12 @@
   "name": "template-node-express",
   "version": "1.0.0",
   "description": "Template repo for NodeJS with Express",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "gulp",
-    "start": "node server/server.js",
-    "dev": "gulp watch & nodemon server/server.js"
+    "start": "node server/app.js",
+    "dev": "gulp watch & nodemon server/app.js"
   },
   "repository": {
     "type": "git",
