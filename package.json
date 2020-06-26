@@ -1,0 +1,40 @@
+{
+  "name": "template-node-express",
+  "version": "1.0.0",
+  "description": "Template repo for NodeJS with Express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martendebruijn/template-node-express.git"
+  },
+  "keywords": [
+    "nodejs",
+    "template",
+    "express"
+  ],
+  "author": "Marten de Bruijn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martendebruijn/template-node-express/issues"
+  },
+  "homepage": "https://github.com/martendebruijn/template-node-express#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-terser": "^1.2.0",
+    "node-fetch": "^2.6.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

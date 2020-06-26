@@ -1,0 +1,78 @@
+* {
+  outline-color: var(--accent-color);
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+}
+/* Lay-out */
+header,
+footer {
+  background: var(--neutral-grey);
+  padding: var(--default-padding);
+}
+header {
+  box-shadow: 0 4px 7px -3px rgba(0, 0, 0, 0.2);
+}
+/* main {} */
+/* Headers and text */
+h1 {
+  font-size: medium;
+  font-weight: 700;
+}
+h2 {
+  font-size: medium;
+  font-weight: 500;
+}
+/* h3 {} 
+h4 {}
+h5 {}
+h6 {}
+p {}
+*/
+/* Buttons */
+button,
+.btn {
+  /* Make your buttons */
+  display: flex;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+  background: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 20px;
+  box-shadow: 0 4px 7px -3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 13.3333px;
+}
+button:hover,
+.btn:hover {
+  transform: scale(1.05);
+  transition: all 0.5s ease-in-out;
+}
+button:disabled,
+.btn:disabled {
+  cursor: not-allowed;
+  background: rgba(211, 211, 211, 0.5);
+  color: #ebebe4;
+}
+button:disabled:hover,
+.btn:disabled:hover {
+  transform: none;
+}
+/* Utility */
+.d-none {
+  display: none;
+}
+/* Display only on mobile devices */
+.mobile {
+  display: none;
+}
+/* Mobile devices */
+@media only screen and (max-width: 500px) {
+  .mobile {
+    display: inline-block;
+  }
+}
