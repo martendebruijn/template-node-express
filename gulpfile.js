@@ -6,7 +6,12 @@ const gulp = require('gulp'),
   terser = require('gulp-terser');
 
 const jsFiles = ['./server/src/js/*.js'],
-  cssFiles = ['./server/src/css/*.css'];
+  cssFiles = [
+    './server/src/css/reset.css',
+    './server/src/css/themes/light.css',
+    './server/src/css/themes/dark.css',
+    './server/src/css/*.css',
+  ];
 
 function css() {
   return gulp
