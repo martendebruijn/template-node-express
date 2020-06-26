@@ -46,6 +46,14 @@ KEY=<YOUR_KEY>
 
 ### 2. Run app
 
+**Build app first**
+
+Inside the terminal
+
+```zsh
+gulp
+```
+
 **Development**
 
 ```zsh
