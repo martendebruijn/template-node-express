@@ -9,8 +9,10 @@
     "prettier": "npx prettier --write .",
     "lint:es": "npx eslint server/src/js/*.js",
     "lint:css": "npx stylelint server/src/css/*.css",
+    "lint": "npm run lint:es && npm run lint:css",
     "build:es": "npm run lint:es && cat server/src/js/*.js > server/public/dist/all.js && terser server/public/dist/all.js -o server/public/dist/all.js",
-    "build:css": "npm run lint:css && cat server/src/css/predence/reset.css server/src/css/*.css > server/public/dist/all.css && npx postcss server/public/dist/all.css -o server/public/dist/all.css"
+    "build:css": "npm run lint:css && cat server/src/css/predence/reset.css server/src/css/*.css > server/public/dist/all.css && npx postcss server/public/dist/all.css -o server/public/dist/all.css",
+    "build": "npm run build:es && npm run build:css"
   },
   "repository": {
     "type": "git",
