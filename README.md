@@ -145,18 +145,18 @@ Sorts CSS according to the rules declared inside `postcss.config.js`.
 ```js
 module.exports = (ctx) => ({
   plugins: {
-    "postcss-sorting": {
+    'postcss-sorting': {
       order: [
-        "custom-properties",
-        "dollar-variables",
-        "declarations",
-        "at-rules",
-        "rules",
+        'custom-properties',
+        'dollar-variables',
+        'declarations',
+        'at-rules',
+        'rules',
       ],
 
-      "properties-order": "alphabetical",
+      'properties-order': 'alphabetical',
 
-      "unspecified-properties-position": "bottom",
+      'unspecified-properties-position': 'bottom',
     },
   },
 });
@@ -167,6 +167,22 @@ module.exports = (ctx) => ({
 ```bash
 prettier --write .
 ```
+
+##### Configuration
+
+`.prettierrc.json`
+
+```json
+{
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5"
+}
+```
+
+- `singleQuote` - use single quotes
+- `tabWidth` - 2 (= default) it's just there to let devs see that I use this setting
+- `trailingComma` - `es5` (= default) it's just there to let devs see that I use this setting
 
 #### lint:es
 
@@ -182,16 +198,49 @@ The configuration file `.eslintrc.js` is located in the root folder. I haven't r
 
 This template also uses Prettier and to make them work nicely together, you have to install [eslint-config-prettier](<[https://github.com/prettier/eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)>) via `npm i -D eslint-config-prettier` . Also add `'prettier'` to the ESLint configuration file (as the last one!):
 
+```js
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: ['eslint:recommended', 'prettier'],
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  rules: {
+    quotes: ['error', 'single'],
+  },
+};
+```
+
+- `quotes` - use single quotes
+
+##### --fix
+
+If the linter displays `x error and y warnings potentially fixable with the '--fix' option`, you can use:
+
+```bash
+  npx eslint path/to/file.js --fix
+```
+
+##### Configuration
+
+The configuration file `.eslintrc.js` is located in the root folder. I haven't really looked at the configuration/ESlint rules (yet).
+
+This template also uses Prettier and to make them work nicely together, you have to install [eslint-config-prettier](<[https://github.com/prettier/eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)>) via `npm i -D eslint-config-prettier` . Also add `'prettier'` to the ESLint configuration file (as the last one!):
+
 ```jsx
 module.exports = {
   env: {
     browser: true,
     es2021: true,
   },
-  extends: ["eslint:recommended", "prettier"],
+  extends: ['eslint:recommended', 'prettier'],
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: 'module',
   },
   rules: {},
 };
@@ -200,10 +249,12 @@ module.exports = {
 #### lint:css
 
 ```bash
-stylelint server/src/css/.
+npm run prefix-css && stylelint server/src/css/.
 ```
 
-Lint all `.css` files inside `server/src/css/.`. Except for `reset.css` or `normalize.css` and if you want other files you define in `.stylelintignore`.
+Before linting run auto-prefix script, that way you'll also check those.
+
+Lint all `.css` files inside `server/src/css/.`. Except for `reset.css` or `normalize.css` (`.stylelintignore`) and if you want other files you define in `.stylelintignore`.
 
 ##### Configuration
 
@@ -211,9 +262,36 @@ The configuration file `.stylelintrc.json` is located in the root folder. I've i
 
 ```json
 {
-  "extends": "stylelint-config-standard"
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "font-family-name-quotes": "always-where-recommended",
+    "selector-attribute-quotes": "never",
+    "string-quotes": ["double", { "avoidEscape": true }],
+    "at-rule-no-vendor-prefix": true,
+    "media-feature-name-no-vendor-prefix": true,
+    "property-no-vendor-prefix": true,
+    "selector-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "color-named": "never",
+    "color-no-hex": true,
+    "declaration-no-important": true
+  }
 }
 ```
+
+- `extends` - extends `stylelint-config-standard`
+- `font-family-name-quotes` - Expect quotes only when quotes are _recommended_ = font family names that contain white space, digits, or punctuation characters other than hyphens
+- `selector-attribute-quotes` - never use selector attribute quotes `[target="_blank"]` → `[target=_blank]`
+- `string-quotes` - use double quotes but allow strings to use single-quotes so long as the string contains a quote that would have to be escaped otherwise.
+- With usage of `autoprefixer` the following vendor prefixes are disallowed:
+  - `at-rule-no-vendor-prefix`
+  - `media-feature-name-no-vendor-prefix`
+  - `property-no-vendor-prefix`
+  - `selector-no-vendor-prefix`
+  - `value-no-vendor-prefix`
+- `color-named` - Never use named colors
+- `color-no-hex` - Don't use hex colors, use `hsl()` as much as possible because it's the easiest to precisely change.
+- `declaration-no-important` - Don't use `!important`
 
 #### lint
 
@@ -280,7 +358,7 @@ Minify `all.js` and `all.css`.
 #### prefix-css
 
 ```bash
-postcss server/src/css/global.css --use autoprefixer -d server/src/src/global.css
+postcss $(find server/src/css -name '*.css') --use autoprefixer -r
 ```
 
 Auto-prefix CSS, specify the browser needs in `package.json` with the `browserlist` key, for example:

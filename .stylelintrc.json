@@ -1,3 +1,16 @@
 {
-  "extends": "stylelint-config-standard"
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "font-family-name-quotes": "always-where-recommended",
+    "selector-attribute-quotes": "never",
+    "string-quotes": ["double", { "avoidEscape": true }],
+    "at-rule-no-vendor-prefix": true,
+    "media-feature-name-no-vendor-prefix": true,
+    "property-no-vendor-prefix": true,
+    "selector-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "color-named": "never",
+    "color-no-hex": true,
+    "declaration-no-important": true
+  }
 }
