@@ -7,16 +7,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
     "start:dev": "nodemon server/app.js",
-    "prettier": "npx prettier --write .",
-    "lint:es": "npx eslint server/src/js/*.js",
-    "lint:css": "npx stylelint server/src/css/*.css",
+    "sort-css": "postcss -c postcss.config.js --no-map -r server/src/css/global.css",
+    "prettier": "prettier --write .",
+    "lint:es": "eslint server/src/js/.",
+    "lint:css": "stylelint server/src/css/.",
     "lint": "npm run lint:es && npm run lint:css",
-    "build:es": "npm run lint:es && cat server/src/js/*.js > server/public/dist/all.js && terser server/public/dist/all.js -o server/public/dist/all.js",
-    "build:css": "npm run lint:css && cat server/src/css/predence/reset.css server/src/css/*.css > server/public/dist/all.css && npx postcss server/public/dist/all.css -o server/public/dist/all.css",
-    "build": "npm run build:es && npm run build:css",
-    "watch:es": "ls",
-    "watch:css": "ls",
-    "watch": "ls"
+    "concat:es": "cat $(find server/src/js -name '*.js') > server/public/dist/all.js",
+    "concat:css": "cat server/src/css/predence/reset.css $(find server/src/css/predence/ -name '*.css' ! -name 'reset.css') $(find server/src/css -path server/src/css/predence -prune -false -o -name '*.css') > server/public/dist/all.css",
+    "concat": "npm run concat:es && npm run concat:css",
+    "min:es": "terser server/public/dist/all.js -o server/public/dist/all.js",
+    "min:css": "postcss server/src/css/global.css --use cssnano > server/public/dist/all.css",
+    "minify": "npm run min:es && npm run min:css",
+    "prefix-css": "postcss server/src/css/global.css --use autoprefixer -d server/src/css/global.css",
+    "build:es": "npm run lint:es && npm run concat:es && npm run min:es",
+    "build:css": "npm run lint:css && npm run prefix-css && npm run concat:css && npm run min:css",
+    "build": "npm run build:es && npm run build:css"
   },
   "repository": {
     "type": "git",
@@ -39,12 +44,10 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.3",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
     "path": "^0.12.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
-    "chokidar": "^3.5.1",
     "cssnano": "^5.0.2",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
@@ -55,6 +58,7 @@
     "postcss-sorting": "^6.0.0",
     "prettier": "^2.3.0",
     "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^22.0.0"
+    "stylelint-config-standard": "^22.0.0",
+    "terser": "^5.7.0"
   }
 }

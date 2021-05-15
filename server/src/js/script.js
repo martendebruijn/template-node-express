@@ -1,0 +1,11 @@
+console.log("i am from script.js");
+console.log("i am from script.js");
+console.log("ik log nu");
+console.log("ik log nu");
+console.log("ik log nu");
+console.log("ik log nu");
+console.log("ik log nu");
+console.log("ik log nu");
+console.log("ik log nu");
+console.log("herstart ik nu?");
+console.log("herstart ik nu?");

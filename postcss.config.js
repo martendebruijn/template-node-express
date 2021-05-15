@@ -13,7 +13,5 @@ module.exports = (ctx) => ({
 
       "unspecified-properties-position": "bottom",
     },
-    autoprefixer: {},
-    cssnano: { preset: "default" },
   },
 });
