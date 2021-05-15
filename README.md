@@ -25,6 +25,8 @@ npm start
 npm start:dev
 ```
 
+Use either `normalize.css` or `reset.css` or supply your own or neither. Make sure to delete the ones you don't use and update the NPM script `concat:css` accordingly. Make sure to use the latest version if the ones supplied here are outdated.
+
 ## Dependencies
 
 - `compression`- used for compressing the application
