@@ -1,49 +1,59 @@
 # Template Node Express README
 
-# Introduction
+## Introduction
 
-Some introduction
+Template for Web app using Node, Express and EJS. With a linter for JavaScript and CSS files, auto-prefixing and sorting CSS. Also supports compression and minifying and PWA setup.
 
-# TOC
+## TOC
 
-# Usage
+- [Usage](#usage)
+- [Dependencies](#dependencies)
+  - [DevDependencies](#devdependencies)
+    - [Linters](#linters)
+    - [POSTCSS](#postcss)
+- [File structure](#file-structure)
+- [NPM scripts](#npm-scripts)
+  - [NPM scripts overview](#npm-scripts-overview)
+  - [NPM scripts full list](#npm-scripts-full-list)
+
+## Usage
 
 ```bash
-git clone ...
+git clone https://github.com/martendebruijn/template-node-express.git
 npm i
 npm start
 npm start:dev
 ```
 
-# Dependencies
+## Dependencies
 
-- `compression`- used for...
-- `dotenv`- used for...
-- `ejs`- used for...
-- `express`- used for...
-- `path`- used for...
+- `compression`- used for compressing the application
+- `dotenv`- used for handling `.env`
+- `ejs`- used for templating
+- `express`- used for routing
+- `path`- used for `.use(express.static(path.join(__dirname, "public")))` in `app.js`
 
-## DevDependencies
+### DevDependencies
 
-- `nodemon`- used for...
-- `prettier`- used for...
+- `nodemon`- auto-restarting server in development mode
+- `prettier`- to make files look nice
 
-### Linters
+#### Linters
 
-- `stylelint`- used for...
-- `stylelint-config-standard`- used for...
-- `eslint`- used for...
-- `eslint-config-prettier`- used for...
+- `stylelint`- used for linting CSS
+- `stylelint-config-standard`- standard configuration for stylelint
+- `eslint`- used for linting JavaScript
+- `eslint-config-prettier`- configuration to make ESLint and Prettier work nicely togheter
 
-### POSTCSS
+#### POSTCSS
 
-- `postcss`- used for...
-- `postcss-cli`- used for...
-- `postcss-sorting`- used for...
-- `autoprefixer`- used for...
-- `cssnano`- used for...
+- `postcss`- used for sorting, auto-prefixing, lint and minify CSS
+- `postcss-cli`- to use POSTCSS with npm scripts
+- `postcss-sorting`- used for sorting CSS
+- `autoprefixer`- used for auto-prefixing CSS
+- `cssnano`- used for minifying CSS
 
-# File structure
+## File structure
 
 - `server/` - root folder
   - `modules/` - all JS modules go here
@@ -82,53 +92,81 @@ npm start:dev
 - `package.json` - package
 - `postcss.config.js` - postcss configuration
 
-# NPM Scripts
+## NPM scripts
 
-## Overview
+### NPM scripts overview
 
-- `start`
-- `start:dev`
-- `sort-css`
-- `prettier`
-- `lint:es`
-- `lint:css`
-- `lint`
-- `concat:es`
-- `concat:css`
-- `concat`
-- `min:es`
-- `min:css`
-- `minify`
-- `prefix-css`
-- `build:es`
-- `build:css`
-- `build`
+- `start` - start app
+- `start:dev` - start development mode
+- `sort-css` - sort css according to rules
+- `prettier` - run prettier on all files except the ones in `.prettierignore`
+- `lint:es` - lint all `.js` files
+- `lint:css` - lint all `.css` files
+- `lint` - lint all `.js` and `.css` files
+- `concat:es` - concatenate all `.js` files
+- `concat:css` - concatenate all `.css` files
+- `concat` - concatenate all `.js` and `.css` files
+- `min:es` - minify JavaScipt
+- `min:css` - minify CSS
+- `minify` - minify JavaScript and CSS
+- `prefix-css` - auto-prefix CSS
+- `build:es` - build JavaScript
+- `build:css` - build CSS
+- `build` - build JavaScript and CSS
 
-## start
+### NPM scripts full list
+
+#### start
 
 ```bash
 node server/app.js
 ```
 
-## start:dev
+Starts the application.
+
+#### start:dev
 
 ```bash
 nodemon server/app.js
 ```
 
-## sort-css
+Starts the application in development mode.
+
+#### sort-css
 
 ```bash
 postcss -c postcss.config.js --no-map -r server/src/css/global.css
 ```
 
-## prettier
+Sorts CSS according to the rules declared inside `postcss.config.js`.
+
+```js
+module.exports = (ctx) => ({
+  plugins: {
+    "postcss-sorting": {
+      order: [
+        "custom-properties",
+        "dollar-variables",
+        "declarations",
+        "at-rules",
+        "rules",
+      ],
+
+      "properties-order": "alphabetical",
+
+      "unspecified-properties-position": "bottom",
+    },
+  },
+});
+```
+
+#### prettier
 
 ```bash
 prettier --write .
 ```
 
-## lint:es
+#### lint:es
 
 ```bash
 eslint server/src/js/.
@@ -136,7 +174,7 @@ eslint server/src/js/.
 
 Lint all `.js` files inside `server/src/js`.
 
-### Configuration
+##### Configuration
 
 The configuration file `.eslintrc.js` is located in the root folder. I haven't really looked at the configuration/ESlint rules (yet).
 
@@ -157,7 +195,7 @@ module.exports = {
 };
 ```
 
-## lint:css
+#### lint:css
 
 ```bash
 stylelint server/src/css/.
@@ -165,7 +203,7 @@ stylelint server/src/css/.
 
 Lint all `.css` files inside `server/src/css/.`. Except for `reset.css` or `normalize.css` and if you want other files you define in `.stylelintignore`.
 
-### Configuration
+##### Configuration
 
 The configuration file `.stylelintrc.json` is located in the root folder. I've installed `stylelint-config-standard` ( `npm i -D stylelint-config-standard` ):
 
@@ -175,7 +213,7 @@ The configuration file `.stylelintrc.json` is located in the root folder. I've i
 }
 ```
 
-## lint
+#### lint
 
 ```bash
 npm run lint:es && npm run lint:css
@@ -183,7 +221,7 @@ npm run lint:es && npm run lint:css
 
 Executes the linter scripts for both the JavaScript and the CSS files.
 
-## concat:es
+#### concat:es
 
 ```bash
 cat $(find server/src/js -name '*.js') > server/public/dist/all.js
@@ -191,7 +229,7 @@ cat $(find server/src/js -name '*.js') > server/public/dist/all.js
 
 Concatenate all `.js` files inside `server/src/js/*` (including subfolders) and output it in `server/public/dist/all.js`.
 
-## concat:css
+#### concat:css
 
 ```bash
 cat server/src/css/predence/reset.css $(find server/src/css/predence/ -name '*.css' ! -name 'reset.css') $(find server/src/css -path server/src/css/predence -prune -false -o -name '*.css') > server/public/dist/all.css
@@ -205,7 +243,7 @@ cat server/src/css/predence/reset.css server/src/css/predence/important-script.c
 
 Output file: `server/public/dist/all.css`.
 
-## concat
+#### concat
 
 ```bash
 npm run concat:es && npm run concat:css
@@ -213,7 +251,7 @@ npm run concat:es && npm run concat:css
 
 Concatenate all `.js` and `.css` files from `server/src`
 
-## min:es
+#### min:es
 
 ```bash
 terser server/public/dist/all.js -o server/public/dist/all.js
@@ -221,7 +259,7 @@ terser server/public/dist/all.js -o server/public/dist/all.js
 
 Minify `all.js`. Run this after concatenating (or just run `build:es`).
 
-## min:css
+#### min:css
 
 ```bash
 postcss server/src/css/global.css --use cssnano > server/public/dist/global.css
@@ -229,7 +267,7 @@ postcss server/src/css/global.css --use cssnano > server/public/dist/global.css
 
 Minify `all.css`. Run this after concatenating and prefixing (or just run `build:css`).
 
-## minify
+#### minify
 
 ```bash
 npm run min:es && npm run min:css
@@ -237,7 +275,7 @@ npm run min:es && npm run min:css
 
 Minify `all.js` and `all.css`.
 
-## prefix-css
+#### prefix-css
 
 ```bash
 postcss server/src/css/global.css --use autoprefixer -d server/src/src/global.css
@@ -251,7 +289,7 @@ Auto-prefix CSS, specify the browser needs in `package.json` with the `browserli
 }
 ```
 
-## build:es
+#### build:es
 
 ```bash
 npm run lint:es && npm run concat:es && npm run min:es
@@ -263,7 +301,7 @@ Build script for JavaScript files:
 2. Concatenating
 3. Minifying
 
-## build:css
+#### build:css
 
 ```bash
 npm run lint:css && npm run prefix-css && npm run concat:css && npm run min:css
@@ -275,7 +313,7 @@ Build script for CSS files:
 2. Concatenating
 3. Minifying
 
-## build
+#### build
 
 ```bash
 npm run build:es && npm run build:css
