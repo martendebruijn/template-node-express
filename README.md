@@ -174,15 +174,11 @@ prettier --write .
 
 ```json
 {
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5"
+  "singleQuote": true
 }
 ```
 
 - `singleQuote` - use single quotes
-- `tabWidth` - 2 (= default) it's just there to let devs see that I use this setting
-- `trailingComma` - `es5` (= default) it's just there to let devs see that I use this setting
 
 #### lint:es
 
@@ -384,7 +380,7 @@ Build script for JavaScript files:
 #### build:css
 
 ```bash
-npm run lint:css && npm run prefix-css && npm run concat:css && npm run min:css
+npm run prefix-css && npm run lint:css && npm run concat:css && npm run min:css
 ```
 
 Build script for CSS files:

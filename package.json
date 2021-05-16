@@ -20,7 +20,7 @@
     "minify": "npm run min:es && npm run min:css",
     "prefix-css": "postcss $(find server/src/css -name '*.css') --use autoprefixer -r",
     "build:es": "npm run lint:es && npm run concat:es && npm run min:es",
-    "build:css": "npm run lint:css && npm run prefix-css && npm run concat:css && npm run min:css",
+    "build:css": "npm run prefix-css && npm run lint:css && npm run concat:css && npm run min:css",
     "build": "npm run build:es && npm run build:css"
   },
   "repository": {
